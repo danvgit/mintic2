@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { useState } from 'react'
+import './App.css'
+import Gestion from './components/gestion'
+import Login from './components/login'
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Nuevo from './components/nuevo'
+import Editar from './components/editar'
+import Registro from './components/registro'
+import Estado from './components/estado'
+
+
+ function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path='/gestion' element={<Gestion />}/>
+          <Route path='/nuevo' element={<Nuevo />}/>
+          <Route path='/editar' element={<Editar />}/>
+          <Route path='/registro' element={<Registro />}/>
+          <Route path='/estado' element={<Estado />}/>
+        </Routes>
+      </BrowserRouter> 
     </div>
-  );
-}
+  )
+} 
 
 export default App;
