@@ -5,6 +5,7 @@ let bodyParser = require('body-parser')
 require('dotenv').config()
 // Express Route
 const paqRoute = require('../backend/routes/paq.route')
+const userRoute = require('../backend/routes/user.route')
 
 mongoose
     .connect(process.env.MONGO_DB_URI)
@@ -20,8 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 extended: true
 }));
+
 app.use(cors());
 app.use('/paquetes', paqRoute)
+app.use('/users', userRoute)
+
 // PORT
 const port = process.env.PORT || 4000
 const server = app.listen(port, () => {

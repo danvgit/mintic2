@@ -15,7 +15,7 @@ import Estado from './components/estado'
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />}/>
           <Route path='/gestion' element={<Gestion />}/>
           <Route path='/nuevo' element={<Nuevo />}/>
           <Route path='/editar' element={<Editar />}/>

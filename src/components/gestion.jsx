@@ -1,20 +1,7 @@
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
-const paquete = [
-    {
-        id: 1,
-        dirEntrega: 'Calle 20 # 10 - 44',
-        ciuEntrega: 'Barranquilla',
-        nomEntrega: 'Carlos Jaramillo',
-        conEntrega: '3202553330'
-    },
-    {
-        id: 2,
-        dirEntrega: 'Cra 20 # 10 - 44',
-        ciuEntrega: 'Cartagena',
-        nomEntrega: 'Manuel Soto',
-        conEntrega: '3582553330'
-    }]
 
 const labels = [
     "id",
@@ -26,10 +13,23 @@ const labels = [
 ]
 
 const Gestion = () => {
+
+    const [paquetes, setPaquetes] = useState(null)
+
+    useEffect (() => {
+        const userId = "638d191357848b1b8431de72"
+        axios
+            .get("http://localhost:4000/paquetes?userId=" + userId)
+            .then(result => {
+                console.log(result.data)
+                setPaquetes(result.data)
+            }) 
+    }, [] )
+
     return (
         <>
             <div className="gestion-home">
-                <Link className="btn btn-primary books-home__create" to='/ges_crear'>Nuevo</Link>
+                <Link className="nuevo_item" to='/nuevo'>Nuevo</Link>
                 <table className="table">
                     <thead>
                         <tr>
@@ -39,21 +39,21 @@ const Gestion = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paquete.map((paq, index) => {
+                        {paquetes !== null ? paquetes.map((paq, index) => {
                             return (
                                 <tr key={index}>
                                     <th scope="row">
-                                        <Link to={'/paquete/' + paq.id}>{paq.id}</Link>
+                                        <Link to={'/paquete/' + paq._id}>{paq._id}</Link>
                                     </th>
                                     <td>{paq.dirEntrega}</td>
                                     <td>{paq.ciuEntrega}</td>
                                     <td>{paq.nomEntrega}</td>
                                     <td>{paq.conEntrega}</td>
                                     <td className="d-flex gap-2 justify-content-center">
-                                        <Link className="btn btn-success" to={'/paquete/' + paq.id + '/edit'}>Edit</Link>
+                                        <Link className="btn btn-success" to={'/paquete/' + 'edit/' + paq._id }>Edit</Link>
                                     </td>
                                 </tr>)
-                        })}
+                        }) : '' }
                     </tbody>
                 </table>
             </div>

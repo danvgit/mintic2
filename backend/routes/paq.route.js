@@ -19,9 +19,9 @@ router.route('/create').post((req, res, next) => {
 })
 
 //read paquetes entonces GET
-//endpoint  localhost:5000/paquetes/...
-router.route('/').get((req, res) => {
-    paqSchema.find((error, data) => {
+//endpoint  localhost:5000/paquetes?userId=1
+router.route('/').get((req, res, next) => {
+    paqSchema.find({userId: req.query.userId}, (error, data) => {
         if (error) {
             return next(error)
         } else {

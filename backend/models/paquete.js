@@ -2,17 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let paqSchema = new Schema({
-    id: {
-        type:Number,
-        min: 1,
-        required: true,
-    },
     date: {
-        type: Date,
+        type: String,
         required: true,
     },
     hour: {
-        type: Number,
+        type: String,
         required: true,
     },
     length: {
@@ -35,7 +30,8 @@ let paqSchema = new Schema({
     },
     weigth: {
         type: Number,
-        min: 150,
+        min: 1,
+        max: 150,
         required: true,
     },
     dirRecogida: {
@@ -57,6 +53,9 @@ let paqSchema = new Schema({
     ciuEntrega: {
         type: String,
         required: true,
+    },
+    userId: {
+        type: Schema.Types.ObjectId, ref: 'user'
     }
 }, {
     collection: 'paquetes'
